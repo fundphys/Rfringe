@@ -2863,5 +2863,20 @@ pdfreport.project <- function() {
 # gets a list of projects, identified by having an element "isProject"
 
 listProjects <- function(envir=.GlobalEnv, ...) {
-    names(which(sapply(ls(envir=envir, all=TRUE), function(string) !is.null(eval(parse(text=string))$isIntProject))))
+	names(which(sapply(ls(envir=envir, all=TRUE), function(string) {
+		x = eval(parse(text=string))
+		is.recursive(x) && !is.null(x$isIntProject)		
+	}))) 
 }
+	
+#!is.null(eval(parse(text=string))$isIntProject))))
+
+
+
+#listInterferograms <- function(envir=.GlobalEnv, ...) {
+#	    names(which(sapply(ls(envir=envir, all=TRUE), function(string) {
+#		 x = eval(parse(text=string))
+#		      is.recursive(x) && !is.null(x$isInterferogram)
+#		 })))
+#}
+
